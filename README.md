@@ -1,5 +1,8 @@
 # Project-Fetchie
-Small 3-stage superscalar RV32I CPU. As of now this is nothing more than a personal pet project. I'm learning as I go, so things might not be right, convensional, clear or efficient to begin with.
+Small 3-stage superscalar RV32I CPU. 
+
+**As of now this is nothing more than a personal pet project. 
+I'm learning as I go, so things might not be right, convensional, clear or efficient to begin with.**
 
 Progress (Checkmark means I have something working, not that it's done):
 * Registers ✅
