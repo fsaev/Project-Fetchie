@@ -36,24 +36,28 @@
         {
             "name": "LUI",
             "_developers_note": "Could potentially be merged with a following ADDI instruction",
+            "_status": "Not verified",
             "opcode": "LUI",
             "type": "U",
             "operations": ["RD_LOAD", "IMM[31:12]"]
         },
         {
             "name": "AUIPC",
+            "_status": "Not verified",
             "opcode": "AUIPC",
             "type": "U",
             "operations": ["PC_ADD", "IMM[31:12]"]
         },
         {
             "name": "JAL",
+            "_status": "Not verified",
             "opcode": "JAL",
             "type": "J",
             "operations": ["RD_LOAD", "PC_ADD", "IMM[20:1]"]
         },
         {
             "name": "JALR",
+            "_status": "Not verified",
             "opcode": "JALR",
             "type": "I",
             "funct3": "000",
@@ -61,6 +65,7 @@
         },
         {
             "name": "BEQ",
+            "_status": "Not verified",
             "opcode": "BRANCH",
             "type": "B",
             "funct3": "000",
@@ -68,6 +73,7 @@
         },
         {
             "name": "BNE",
+            "_status": "Not verified",
             "opcode": "BRANCH",
             "type": "B",
             "funct3": "001",
@@ -75,6 +81,7 @@
         },
         {
             "name": "BLT",
+            "_status": "Not verified",
             "opcode": "BRANCH",
             "type": "B",
             "funct3": "100",
@@ -82,6 +89,7 @@
         },
         {
             "name": "BGE",
+            "_status": "Not verified",
             "opcode": "BRANCH",
             "type": "B",
             "funct3": "101",
@@ -89,6 +97,7 @@
         },
         {
             "name": "BLTU",
+            "_status": "Not verified",
             "opcode": "BRANCH",
             "type": "B",
             "funct3": "110",
@@ -96,6 +105,7 @@
         },
         {
             "name": "BGEU",
+            "_status": "Not verified",
             "opcode": "BRANCH",
             "type": "B",
             "funct3": "111",
@@ -103,6 +113,7 @@
         },
         {
             "name": "LB",
+            "_status": "Not verified",
             "opcode": "LOAD",
             "type": "I",
             "funct3": "000",
@@ -110,6 +121,7 @@
         },
         {
             "name": "LH",
+            "_status": "Not verified",
             "opcode": "LOAD",
             "type": "I",
             "funct3": "001",
@@ -117,6 +129,7 @@
         },
         {
             "name": "LW",
+            "_status": "Not verified",
             "opcode": "LOAD",
             "type": "I",
             "funct3": "010",
@@ -124,6 +137,7 @@
         },
         {
             "name": "LBU",
+            "_status": "Not verified",
             "opcode": "LOAD",
             "type": "I",
             "funct3": "100",
@@ -131,6 +145,7 @@
         },
         {
             "name": "LHU",
+            "_status": "Not verified",
             "opcode": "LOAD",
             "type": "I",
             "funct3": "101",
@@ -138,6 +153,7 @@
         },
         {
             "name": "SB",
+            "_status": "Not verified",
             "opcode": "STORE",
             "type": "S",
             "funct3": "000",
@@ -145,6 +161,7 @@
         },
         {
             "name": "SH",
+            "_status": "Not verified",
             "opcode": "STORE",
             "type": "S",
             "funct3": "001",
@@ -152,6 +169,7 @@
         },
         {
             "name": "SW",
+            "_status": "Not verified",
             "opcode": "STORE",
             "type": "S",
             "funct3": "010",
@@ -159,6 +177,7 @@
         },
         {
             "name": "ADDI",
+            "_status": "Not verified",
             "opcode": "OP_IMM",
             "type": "I",
             "funct3": "000",
@@ -166,6 +185,7 @@
         },
         {
             "name": "SLTI",
+            "_status": "Not verified",
             "opcode": "OP_IMM",
             "type": "I",
             "funct3": "010",
@@ -173,6 +193,7 @@
         },
         {
             "name": "SLTIU",
+            "_status": "Not verified",
             "opcode": "OP_IMM",
             "type": "I",
             "funct3": "011",
@@ -180,6 +201,7 @@
         },
         {
             "name": "XORI",
+            "_status": "Not verified",
             "opcode": "OP_IMM",
             "type": "I",
             "funct3": "100",
@@ -187,6 +209,7 @@
         },
         {
             "name": "ORI",
+            "_status": "Not verified",
             "opcode": "OP_IMM",
             "type": "I",
             "funct3": "110",
@@ -194,6 +217,7 @@
         },
         {
             "name": "ANDI",
+            "_status": "Not verified",
             "opcode": "OP_IMM",
             "type": "I",
             "funct3": "111",
@@ -201,6 +225,7 @@
         },
         {
             "name": "SLLI",
+            "_status": "Not verified",
             "opcode": "OP_IMM",
             "type": "I",
             "funct3": "001",
@@ -209,6 +234,7 @@
         },
         {
             "name": "SRLI",
+            "_status": "Not verified",
             "opcode": "OP_IMM",
             "type": "I",
             "funct3": "101",
@@ -217,6 +243,7 @@
         },
         {
             "name": "SRAI",
+            "_status": "Not verified",
             "opcode": "OP_IMM",
             "type": "I",
             "funct3": "101",
@@ -225,6 +252,7 @@
         },
         {
             "name": "ADD",
+            "_status": "Not verified",
             "opcode": "OP",
             "type": "R",
             "funct3": "000",
@@ -233,6 +261,7 @@
         },
         {
             "name": "SUB",
+            "_status": "Not verified",
             "opcode": "OP",
             "type": "R",
             "funct3": "000",
@@ -241,6 +270,7 @@
         },
         {
             "name": "SLL",
+            "_status": "Not verified",
             "opcode": "OP",
             "type": "R",
             "funct3": "001",
@@ -249,6 +279,7 @@
         },
         {
             "name": "SLT",
+            "_status": "Not verified",
             "opcode": "OP",
             "type": "R",
             "funct3": "010",
@@ -257,6 +288,7 @@
         },
         {
             "name": "SLTU",
+            "_status": "Not verified",
             "opcode": "OP",
             "type": "R",
             "funct3": "011",
@@ -265,6 +297,7 @@
         },
         {
             "name": "XOR",
+            "_status": "Not verified",
             "opcode": "OP",
             "type": "R",
             "funct3": "100",
@@ -273,6 +306,7 @@
         },
         {
             "name": "SRL",
+            "_status": "Not verified",
             "opcode": "OP",
             "type": "R",
             "funct3": "101",
@@ -281,6 +315,7 @@
         },
         {
             "name": "SRA",
+            "_status": "Not verified",
             "opcode": "OP",
             "type": "R",
             "funct3": "101",
@@ -289,6 +324,7 @@
         },
         {
             "name": "OR",
+            "_status": "Not verified",
             "opcode": "OP",
             "type": "R",
             "funct3": "110",
@@ -297,6 +333,7 @@
         },
         {
             "name": "AND",
+            "_status": "Not verified",
             "opcode": "OP",
             "type": "R",
             "funct3": "111",
@@ -305,6 +342,7 @@
         },
         {
             "name": "FENCE",
+            "_status": "Not verified",
             "opcode": "MISC_MEM",
             "type": "I",
             "funct3": "000",
@@ -312,6 +350,7 @@
         },
         {
             "name": "FENCE_I",
+            "_status": "Not verified",
             "opcode": "MISC_MEM",
             "type": "I",
             "funct3": "001",
@@ -319,6 +358,7 @@
         },
         {
             "name": "ECALL",
+            "_status": "Not verified",
             "opcode": "SYSTEM",
             "type": "I",
             "funct3": "000",
@@ -326,6 +366,7 @@
         },
         {
             "name": "EBREAK",
+            "_status": "Not verified",
             "opcode": "SYSTEM",
             "type": "I",
             "funct3": "000",
@@ -333,6 +374,7 @@
         },
         {
             "name": "CSRRW",
+            "_status": "Not verified",
             "opcode": "SYSTEM",
             "type": "I",
             "funct3": "001",
@@ -340,6 +382,7 @@
         },
         {
             "name": "CSRRS",
+            "_status": "Not verified",
             "opcode": "SYSTEM",
             "type": "I",
             "funct3": "010",
@@ -347,6 +390,7 @@
         },
         {
             "name": "CSRRC",
+            "_status": "Not verified",
             "opcode": "SYSTEM",
             "type": "I",
             "funct3": "011",
@@ -354,6 +398,7 @@
         },
         {
             "name": "CSRRWI",
+            "_status": "Not verified",
             "opcode": "SYSTEM",
             "type": "I",
             "funct3": "101",
@@ -361,6 +406,7 @@
         },
         {
             "name": "CSRRSI",
+            "_status": "Not verified",
             "opcode": "SYSTEM",
             "type": "I",
             "funct3": "110",
@@ -368,6 +414,7 @@
         },
         {
             "name": "CSRRCI",
+            "_status": "Not verified",
             "opcode": "SYSTEM",
             "type": "I",
             "funct3": "111",
