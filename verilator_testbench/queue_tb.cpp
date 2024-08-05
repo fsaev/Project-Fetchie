@@ -25,21 +25,59 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#include "Vtop.h"
+#include "Vqueue_tb.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
-#include "uart_emu.h"
 
-static UartEmu uart_emu{9600};
+uint32_t fifo_payload[16] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+uint32_t read_word;
+uint32_t idx = 0;
 
-bool tick(int tickcount, Vtop *top, VerilatedVcdC* tfp) {
-    top->CLK = tickcount % 2;
-    if (tickcount % 10 == 0) {
-        uart_emu.tick(tickcount, top);
+enum State {
+    IDLE,
+    WRITING,
+    READING
+};
+
+State state = WRITING;
+
+bool tick(int tickcount, Vqueue_tb *vqueue_tb, VerilatedVcdC* tfp) {
+    vqueue_tb->clk = tickcount % 2;
+    vqueue_tb->reset = 0;
+
+    if(vqueue_tb->clk == 0){
+    switch(state){
+        case IDLE:
+            vqueue_tb->wr_en = 0;
+            vqueue_tb->shift_out = 0;
+            break;
+        case WRITING:
+            vqueue_tb->wr_en = 1;
+            vqueue_tb->shift_out = 0;
+            vqueue_tb->data_in = fifo_payload[idx];
+            printf("Clocking in %d\n", fifo_payload[idx]);
+            idx++;
+            if(idx == 15){
+                printf("Finished writing\n");
+                state = READING;
+            }
+            break;
+        case READING:
+            vqueue_tb->wr_en = 0;
+            vqueue_tb->shift_out = 1;
+            read_word = vqueue_tb->data_out;
+            printf("Read out %d\n", read_word);
+            idx--;
+            if(idx == 0){
+                state = WRITING;
+            }
+            break;
+        }
     }
-    top->eval(); //Run module
 
-    if(tickcount > 10000000){
+    vqueue_tb->eval(); //Run module
+
+    if(tickcount > 1000){
         printf("Exceeded simulation limit, halting\n");
         return true;
     }
@@ -54,22 +92,21 @@ int main(int argc, char** argv) {
     bool running = true;
     VerilatedContext* contextp = new VerilatedContext;
     contextp->commandArgs(argc, argv);
-    Vtop* top = new Vtop{contextp};
+    Vqueue_tb* vqueue_tb = new Vqueue_tb{contextp};
 
 	// Generate a trace
 	Verilated::traceEverOn(true);
 	VerilatedVcdC* tfp = new VerilatedVcdC;
-	top->trace(tfp, 00);
-	tfp->open("toptrace.vcd");
-    top->RESET_N = 0;
+	vqueue_tb->trace(tfp, 00);
+	tfp->open("fifotrace.vcd");
 
     while (!contextp->gotFinish() && running) {
-        if(tick(++counter, top, tfp)){
+        if(tick(++counter, vqueue_tb, tfp)){
             running = false;
         }
     }
     tfp->flush();
-    delete top;
+    delete vqueue_tb;
     delete contextp;
     delete tfp;
     return 0;

@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "cstdint": "cpp",
+        "*.tcc": "cpp",
+        "fstream": "cpp",
+        "atomic": "cpp",
+        "any": "cpp",
+        "bitset": "cpp",
+        "memory": "cpp",
+        "random": "cpp",
+        "future": "cpp",
+        "optional": "cpp"
+    }
+}

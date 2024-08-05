@@ -25,21 +25,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#include "Vtop.h"
+#include "Vdecode_tb.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
-#include "uart_emu.h"
 
-static UartEmu uart_emu{9600};
 
-bool tick(int tickcount, Vtop *top, VerilatedVcdC* tfp) {
-    top->CLK = tickcount % 2;
-    if (tickcount % 10 == 0) {
-        uart_emu.tick(tickcount, top);
+enum State {
+    IDLE,
+    FETCH,
+    REQUEST_BACK,
+    FETCH_MORE,
+    INVALIDATE_CACHE,
+    CHECK_IF_EMPTY,
+    RUN_FOR_TWO_CYCLES
+};
+
+State state = IDLE;
+
+bool tick(int tickcount, Vdecode_tb *vdecode_tb, VerilatedVcdC* tfp) {
+    uint32_t read_word;
+    vdecode_tb->clk = tickcount % 2;
+
+    if(vdecode_tb->clk == 0){
+
     }
-    top->eval(); //Run module
 
-    if(tickcount > 10000000){
+    vdecode_tb->eval(); //Run module
+
+    if(tickcount > 1000){
         printf("Exceeded simulation limit, halting\n");
         return true;
     }
@@ -54,22 +67,21 @@ int main(int argc, char** argv) {
     bool running = true;
     VerilatedContext* contextp = new VerilatedContext;
     contextp->commandArgs(argc, argv);
-    Vtop* top = new Vtop{contextp};
+    Vdecode_tb* vdecode_tb = new Vdecode_tb{contextp};
 
 	// Generate a trace
 	Verilated::traceEverOn(true);
 	VerilatedVcdC* tfp = new VerilatedVcdC;
-	top->trace(tfp, 00);
-	tfp->open("toptrace.vcd");
-    top->RESET_N = 0;
+	vdecode_tb->trace(tfp, 00);
+	tfp->open("decodetrace.vcd");
 
     while (!contextp->gotFinish() && running) {
-        if(tick(++counter, top, tfp)){
+        if(tick(++counter, vdecode_tb, tfp)){
             running = false;
         }
     }
     tfp->flush();
-    delete top;
+    delete vdecode_tb;
     delete contextp;
     delete tfp;
     return 0;
