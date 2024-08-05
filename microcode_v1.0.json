@@ -1,0 +1,377 @@
+{
+    "id": "RV32I",
+    "version": "1.0",
+    "interleave_skip": 32,
+    "opcodes": {
+            "LOAD": "00000",
+            "LOAD_FP": "00001",
+            "CUSTOM_0": "00010",
+            "MISC_MEM": "00011",
+            "OP_IMM": "00100",
+            "AUIPC": "00101",
+            "OP_IMM_32": "00110",
+            "STORE": "01000",
+            "STORE_FP": "01001",
+            "CUSTOM_1": "01010",
+            "AMO": "01011",
+            "OP": "01100",
+            "LUI": "01101",
+            "OP_32": "01110",
+            "MADD": "10000",
+            "MSUB": "10001",
+            "NMSUB": "10010",
+            "NMADD": "10011",
+            "OP_FP": "10100",
+            "RESERVED_1": "10101",
+            "CUSTOM_2": "10110",
+            "BRANCH": "11000",
+            "JALR": "11001",
+            "RESERVED_2": "11010",
+            "JAL": "11011",
+            "SYSTEM": "11100",
+            "RESERVED_3": "11101",
+            "CUSTOM_3": "11110"
+    },
+    "instructions": [ 
+        {
+            "name": "LUI",
+            "_developers_note": "Could potentially be merged with a following ADDI instruction",
+            "opcode": "LUI",
+            "type": "U",
+            "operations": ["RD_LOAD", "IMM[31:12]"]
+        },
+        {
+            "name": "AUIPC",
+            "opcode": "AUIPC",
+            "type": "U",
+            "operations": ["PC_ADD", "IMM[31:12]", "CACHE_INVALIDATE"]
+        },
+        {
+            "name": "JAL",
+            "opcode": "JAL",
+            "type": "J",
+            "operations": ["RD_LOAD", "PC_ADD", "IMM[20:1]", "CACHE_INVALIDATE"]
+        },
+        {
+            "name": "JALR",
+            "opcode": "JALR",
+            "type": "I",
+            "funct3": "000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]", "PC_ADD", "CACHE_INVALIDATE"]
+        },
+        {
+            "name": "BEQ",
+            "opcode": "BRANCH",
+            "type": "B",
+            "funct3": "000",
+            "operations": ["RS1_LOAD", "RS2_LOAD", "IMM[12:1]", "PC_ADD"]
+        },
+        {
+            "name": "BNE",
+            "opcode": "BRANCH",
+            "type": "B",
+            "funct3": "001",
+            "operations": ["RS1_LOAD", "RS2_LOAD", "IMM[12:1]", "PC_ADD"]
+        },
+        {
+            "name": "BLT",
+            "opcode": "BRANCH",
+            "type": "B",
+            "funct3": "100",
+            "operations": ["RS1_LOAD", "RS2_LOAD", "IMM[12:1]", "PC_ADD"]
+        },
+        {
+            "name": "BGE",
+            "opcode": "BRANCH",
+            "type": "B",
+            "funct3": "101",
+            "operations": ["RS1_LOAD", "RS2_LOAD", "IMM[12:1]", "PC_ADD"]
+        },
+        {
+            "name": "BLTU",
+            "opcode": "BRANCH",
+            "type": "B",
+            "funct3": "110",
+            "operations": ["RS1_LOAD", "RS2_LOAD", "IMM[12:1]", "PC_ADD"]
+        },
+        {
+            "name": "BGEU",
+            "opcode": "BRANCH",
+            "type": "B",
+            "funct3": "111",
+            "operations": ["RS1_LOAD", "RS2_LOAD", "IMM[12:1]", "PC_ADD"]
+        },
+        {
+            "name": "LB",
+            "opcode": "LOAD",
+            "type": "I",
+            "funct3": "000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "LH",
+            "opcode": "LOAD",
+            "type": "I",
+            "funct3": "001",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "LW",
+            "opcode": "LOAD",
+            "type": "I",
+            "funct3": "010",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "LBU",
+            "opcode": "LOAD",
+            "type": "I",
+            "funct3": "100",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "LHU",
+            "opcode": "LOAD",
+            "type": "I",
+            "funct3": "101",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "SB",
+            "opcode": "STORE",
+            "type": "S",
+            "funct3": "000",
+            "operations": ["RS1_LOAD", "RS2_LOAD", "IMM[11:5]", "IMM[4:0]"]
+        },
+        {
+            "name": "SH",
+            "opcode": "STORE",
+            "type": "S",
+            "funct3": "001",
+            "operations": ["RS1_LOAD", "RS2_LOAD", "IMM[11:5]", "IMM[4:0]"]
+        },
+        {
+            "name": "SW",
+            "opcode": "STORE",
+            "type": "S",
+            "funct3": "010",
+            "operations": ["RS1_LOAD", "RS2_LOAD", "IMM[11:5]", "IMM[4:0]"]
+        },
+        {
+            "name": "ADDI",
+            "opcode": "OP_IMM",
+            "type": "I",
+            "funct3": "000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "SLTI",
+            "opcode": "OP_IMM",
+            "type": "I",
+            "funct3": "010",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "SLTIU",
+            "opcode": "OP_IMM",
+            "type": "I",
+            "funct3": "011",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "XORI",
+            "opcode": "OP_IMM",
+            "type": "I",
+            "funct3": "100",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "ORI",
+            "opcode": "OP_IMM",
+            "type": "I",
+            "funct3": "110",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "ANDI",
+            "opcode": "OP_IMM",
+            "type": "I",
+            "funct3": "111",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "SLLI",
+            "opcode": "OP_IMM",
+            "type": "I",
+            "funct3": "001",
+            "funct7": "0000000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[4:0]"]
+        },
+        {
+            "name": "SRLI",
+            "opcode": "OP_IMM",
+            "type": "I",
+            "funct3": "101",
+            "funct7": "0000000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[4:0]"]
+        },
+        {
+            "name": "SRAI",
+            "opcode": "OP_IMM",
+            "type": "I",
+            "funct3": "101",
+            "funct7": "0100000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[4:0]"]
+        },
+        {
+            "name": "ADD",
+            "opcode": "OP",
+            "type": "R",
+            "funct3": "000",
+            "funct7": "0000000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "RS2_LOAD"]
+        },
+        {
+            "name": "SUB",
+            "opcode": "OP",
+            "type": "R",
+            "funct3": "000",
+            "funct7": "0100000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "RS2_LOAD"]
+        },
+        {
+            "name": "SLL",
+            "opcode": "OP",
+            "type": "R",
+            "funct3": "001",
+            "funct7": "0000000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "RS2_LOAD"]
+        },
+        {
+            "name": "SLT",
+            "opcode": "OP",
+            "type": "R",
+            "funct3": "010",
+            "funct7": "0000000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "RS2_LOAD"]
+        },
+        {
+            "name": "SLTU",
+            "opcode": "OP",
+            "type": "R",
+            "funct3": "011",
+            "funct7": "0000000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "RS2_LOAD"]
+        },
+        {
+            "name": "XOR",
+            "opcode": "OP",
+            "type": "R",
+            "funct3": "100",
+            "funct7": "0000000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "RS2_LOAD"]
+        },
+        {
+            "name": "SRL",
+            "opcode": "OP",
+            "type": "R",
+            "funct3": "101",
+            "funct7": "0000000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "RS2_LOAD"]
+        },
+        {
+            "name": "SRA",
+            "opcode": "OP",
+            "type": "R",
+            "funct3": "101",
+            "funct7": "0100000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "RS2_LOAD"]
+        },
+        {
+            "name": "OR",
+            "opcode": "OP",
+            "type": "R",
+            "funct3": "110",
+            "funct7": "0000000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "RS2_LOAD"]
+        },
+        {
+            "name": "AND",
+            "opcode": "OP",
+            "type": "R",
+            "funct3": "111",
+            "funct7": "0000000",
+            "operations": ["RD_LOAD", "RS1_LOAD", "RS2_LOAD"]
+        },
+        {
+            "name": "FENCE",
+            "opcode": "MISC_MEM",
+            "type": "I",
+            "funct3": "000",
+            "operations": ["IMM[11:0]"]
+        },
+        {
+            "name": "FENCE_I",
+            "opcode": "MISC_MEM",
+            "type": "I",
+            "funct3": "001",
+            "operations": ["IMM[11:0]"]
+        },
+        {
+            "name": "ECALL",
+            "opcode": "SYSTEM",
+            "type": "I",
+            "funct3": "000",
+            "operations": ["IMM[11:0]"]
+        },
+        {
+            "name": "EBREAK",
+            "opcode": "SYSTEM",
+            "type": "I",
+            "funct3": "000",
+            "operations": ["IMM[11:0]"]
+        },
+        {
+            "name": "CSRRW",
+            "opcode": "SYSTEM",
+            "type": "I",
+            "funct3": "001",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "CSRRS",
+            "opcode": "SYSTEM",
+            "type": "I",
+            "funct3": "010",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "CSRRC",
+            "opcode": "SYSTEM",
+            "type": "I",
+            "funct3": "011",
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "CSRRWI",
+            "opcode": "SYSTEM",
+            "type": "I",
+            "funct3": "101",
+            "operations": ["RD_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "CSRRSI",
+            "opcode": "SYSTEM",
+            "type": "I",
+            "funct3": "110",
+            "operations": ["RD_LOAD", "IMM[11:0]"]
+        },
+        {
+            "name": "CSRRCI",
+            "opcode": "SYSTEM",
+            "type": "I",
+            "funct3": "111",
+            "operations": ["RD_LOAD", "IMM[11:0]"]
+        }
+    ]
+}

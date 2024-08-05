@@ -5,12 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: Current File",
+            "name": "Compile Microcode",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/assembler/main.py",
+            "program": "${workspaceFolder}/microcode_compiler.py",
             "args": [
-                "${workspaceFolder}/assembler/UART_hello.asm"
+                "microcode_v1.0.json"
             ],
             "console": "integratedTerminal"
         }
