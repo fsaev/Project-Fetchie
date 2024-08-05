@@ -44,20 +44,20 @@
             "name": "AUIPC",
             "opcode": "AUIPC",
             "type": "U",
-            "operations": ["PC_ADD", "IMM[31:12]", "CACHE_INVALIDATE"]
+            "operations": ["PC_ADD", "IMM[31:12]"]
         },
         {
             "name": "JAL",
             "opcode": "JAL",
             "type": "J",
-            "operations": ["RD_LOAD", "PC_ADD", "IMM[20:1]", "CACHE_INVALIDATE"]
+            "operations": ["RD_LOAD", "PC_ADD", "IMM[20:1]"]
         },
         {
             "name": "JALR",
             "opcode": "JALR",
             "type": "I",
             "funct3": "000",
-            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]", "PC_ADD", "CACHE_INVALIDATE"]
+            "operations": ["RD_LOAD", "RS1_LOAD", "IMM[11:0]", "PC_ADD"]
         },
         {
             "name": "BEQ",
