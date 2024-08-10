@@ -18,12 +18,11 @@
  *
  */
 
+ /* verilator lint_off UNUSEDSIGNAL */
+
 `default_nettype none
 
-module ice40up5k_spram #(
-	// We current always use the whole SPRAM (128 kB)
-	parameter integer WORDS = 32768
-) (
+module ice40up5k_spram (
 	input clk,
 	input [3:0] wen,
 	input [21:0] addr,
